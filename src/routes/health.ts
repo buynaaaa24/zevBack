@@ -6,7 +6,7 @@ healthRouter.get("/health", (_req, res) => {
   res.json({
     data: {
       status: "ok",
-      service: "foodcity-back",
+      service: "zev-back",
       timestamp: new Date().toISOString(),
     },
   });

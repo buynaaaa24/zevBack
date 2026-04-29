@@ -103,7 +103,7 @@ adminRouter.get("/orders", requirePermission("orders"), async (req, res, next) =
   try {
     const status = req.query.status as string | undefined;
     const lang = (req.query.lang as string) || "mn";
-    const siteId = (req.query.siteId as string) || "zevtaps";
+    const siteId = (req.query.siteId as string) || "zevtabs";
     const filter = { siteId, language: lang, ...(status ? { status } : {}) };
     const orders = await Order.find(filter).sort({ createdAt: -1 }).limit(200).lean();
     res.json({
@@ -137,7 +137,7 @@ adminRouter.patch("/orders/:id", requirePermission("orders"), async (req, res, n
 adminRouter.get("/sales-ads", requirePermission("sales-ads"), async (req, res, next) => {
   try {
     const lang = (req.query.lang as string) || "mn";
-    const siteId = (req.query.siteId as string) || "zevtaps";
+    const siteId = (req.query.siteId as string) || "zevtabs";
     const ads = await SalesAd.find({ siteId, language: lang }).sort({ createdAt: -1 }).limit(200).lean();
     res.json({
       data: ads.map((a) => serializeLean(a as Record<string, unknown>)),
@@ -152,7 +152,7 @@ adminRouter.post("/sales-ads", requirePermission("sales-ads"), async (req, res, 
     const a = req.admin!;
     const requestBody = req.body as Record<string, unknown>;
     const lang = (requestBody.language as string) || "mn";
-    const siteId = (requestBody.siteId as string) || "zevtaps";
+    const siteId = (requestBody.siteId as string) || "zevtabs";
     const ad = await SalesAd.create({
       ...stripSalesAdBody(requestBody),
       language: lang,
@@ -205,7 +205,7 @@ adminRouter.delete("/sales-ads/:id", requirePermission("sales-ads"), async (req,
 adminRouter.get("/jobs", requirePermission("jobs"), async (req, res, next) => {
   try {
     const lang = (req.query.lang as string) || "mn";
-    const siteId = (req.query.siteId as string) || "zevtaps";
+    const siteId = (req.query.siteId as string) || "zevtabs";
     const jobs = await JobPosting.find({ siteId, language: lang }).sort({ createdAt: -1 }).limit(200).lean();
     res.json({
       data: jobs.map((j) => serializeLean(j as Record<string, unknown>)),
@@ -220,7 +220,7 @@ adminRouter.post("/jobs", requirePermission("jobs"), async (req, res, next) => {
     const a = req.admin!;
     const requestBody = req.body as Record<string, unknown>;
     const lang = (requestBody.language as string) || "mn";
-    const siteId = (requestBody.siteId as string) || "zevtaps";
+    const siteId = (requestBody.siteId as string) || "zevtabs";
     const job = await JobPosting.create({
       ...stripJobBody(requestBody),
       language: lang,
@@ -354,7 +354,7 @@ adminRouter.post(
 adminRouter.get("/site-pages", requirePermission("site-content"), async (req, res, next) => {
   try {
     const lang = (req.query.lang as string) || "mn";
-    const siteId = (req.query.siteId as string) || "zevtaps";
+    const siteId = (req.query.siteId as string) || "zevtabs";
     const list = await SitePage.find({ siteId, language: lang }).sort({ pageId: 1 }).lean();
     res.json({
       data: list.map((p) => serializeLean(p as Record<string, unknown>)),
@@ -368,7 +368,7 @@ adminRouter.get("/site-pages/:pageId", requirePermission("site-content"), async 
   try {
     const pageId = paramString(req.params.pageId);
     const lang = (req.query.lang as string) || "mn";
-    const siteId = (req.query.siteId as string) || "zevtaps";
+    const siteId = (req.query.siteId as string) || "zevtabs";
     const doc = await SitePage.findOne({ siteId, pageId, language: lang }).lean();
     if (!doc) {
       res.json({ data: { siteId, pageId, language: lang, sections: {}, id: null } });
@@ -384,7 +384,7 @@ adminRouter.put("/site-pages/:pageId", requirePermission("site-content"), async 
   try {
     const pageId = paramString(req.params.pageId);
     const lang = (req.query.lang as string) || "mn";
-    const siteId = (req.query.siteId as string) || "zevtaps";
+    const siteId = (req.query.siteId as string) || "zevtabs";
     const { sections } = req.body as { sections?: unknown };
     if (!sections || typeof sections !== "object" || Array.isArray(sections)) {
       res.status(400).json({

@@ -2,7 +2,7 @@ import mongoose, { Schema } from "mongoose";
 
 const SitePageSchema = new Schema(
   {
-    siteId: { type: String, required: true, default: "zevtaps", index: true },
+    siteId: { type: String, required: true, default: "zevtabs", index: true },
     pageId: { type: String, required: true, index: true },
     language: { type: String, required: true, default: "mn", enum: ["mn", "en"] },
     sections: { type: Schema.Types.Mixed, default: {} },

@@ -8,15 +8,15 @@ import type { AdminPrincipal } from "../types/adminPrincipal.js";
 export type { AdminPrincipal };
 
 function jwtSecret(): string {
-  return process.env.ADMIN_JWT_SECRET ?? "";
+  return process.env.ADMIN_JWT_SECRET ?? process.env.JWT_SECRET ?? "";
 }
 
 function adminPassword(): string {
-  return process.env.ADMIN_PASSWORD ?? "";
+  return process.env.ADMIN_PASSWORD ?? process.env.ADMIN_SEED_PASSWORD ?? "";
 }
 
 function adminUsername(): string {
-  return process.env.ADMIN_USERNAME ?? "";
+  return process.env.ADMIN_USERNAME ?? process.env.ADMIN_SEED_USERNAME ?? "";
 }
 
 function signToken(principal: AdminPrincipal): string {
