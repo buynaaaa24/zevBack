@@ -7,7 +7,7 @@
     "port": "4000"
   },
   "scripts": {
-    "dev": "cross-env PORT=5001 tsx watch src/index.ts",
+    "dev": "cross-env PORT=5000 tsx watch src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
     "lint": "eslint src",
