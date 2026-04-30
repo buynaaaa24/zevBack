@@ -24,7 +24,7 @@ const PRODUCTION_ORIGINS = [
   "http://bukhbatllc.mn",
   "http://www.bukhbatllc.mn",
 ];
-const envOrigins = (process.env.CORS_ORIGIN ?? "http://localhost:3000,http://localhost:3001,http://127.0.0.1:3000")
+const envOrigins = (process.env.CORS_ORIGIN ?? "http://localhost:3000,http://localhost:3001,http://localhost:5001,http://localhost:5002,http://127.0.0.1:3000")
   .split(",")
   .map((o) => o.trim())
   .filter(Boolean);
