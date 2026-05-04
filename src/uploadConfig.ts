@@ -23,9 +23,9 @@ const storage = multer.diskStorage({
     cb: (error: Error | null, filename: string) => void,
   ) => {
     const ext = path.extname(file.originalname).toLowerCase();
-    const safe = [".jpg", ".jpeg", ".png", ".gif", ".webp", ".svg"].includes(ext)
-      ? ext
-      : ".jpg";
+    const isImage = [".jpg", ".jpeg", ".png", ".gif", ".webp", ".svg"].includes(ext);
+    const isVideo = [".mp4", ".webm", ".mov", ".ogg"].includes(ext);
+    const safe = (isImage || isVideo) ? ext : ".jpg";
     cb(null, `${Date.now()}-${Math.random().toString(36).slice(2, 11)}${safe}`);
   },
 });
@@ -40,8 +40,11 @@ export const upload = multer({
   storage,
   limits: { fileSize: uploadMaxBytes },
   fileFilter: (_req: Request, file: MulterFile, cb: multer.FileFilterCallback) => {
-    if (!file.mimetype.startsWith("image/")) {
-      cb(new Error("Only image files are allowed"));
+    const isImage = file.mimetype.startsWith("image/");
+    const isVideo = file.mimetype.startsWith("video/");
+    
+    if (!isImage && !isVideo) {
+      cb(new Error("Only image and video files are allowed"));
       return;
     }
     cb(null, true);
