@@ -12,7 +12,7 @@ const OrderItemSchema = new Schema(
 const OrderSchema = new Schema(
   {
     customerName: { type: String, required: true },
-    siteId: { type: String, required: true, default: "zevtaps", index: true },
+    siteId: { type: String, required: true, default: "zevtabs", index: true },
     language: { type: String, required: true, default: "mn", enum: ["mn", "en"] },
     phone: { type: String, required: true },
     email: { type: String },

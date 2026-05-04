@@ -3,7 +3,7 @@ import mongoose, { Schema } from "mongoose";
 const JobPostingSchema = new Schema(
   {
     title: { type: String, required: true },
-    siteId: { type: String, required: true, default: "zevtaps", index: true },
+    siteId: { type: String, required: true, default: "zevtabs", index: true },
     language: { type: String, required: true, default: "mn", enum: ["mn", "en"] },
     company: { type: String, required: true },
     location: { type: String, required: true },

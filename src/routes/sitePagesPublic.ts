@@ -8,7 +8,7 @@ sitePagesPublicRouter.get("/:pageId", async (req, res, next) => {
   try {
     const { pageId } = req.params;
     const lang = (req.query.lang as string) || "mn";
-    const siteId = (req.query.siteId as string) || "zevtaps";
+    const siteId = (req.query.siteId as string) || "zevtabs";
     if (!pageId || pageId.length > 64) {
       res.status(400).json({ error: { code: "BAD_REQUEST", message: "pageId" } });
       return;

@@ -3,7 +3,7 @@ import mongoose, { Schema } from "mongoose";
 const SalesAdSchema = new Schema(
   {
     title: { type: String, required: true },
-    siteId: { type: String, required: true, default: "zevtaps", index: true },
+    siteId: { type: String, required: true, default: "zevtabs", index: true },
     language: { type: String, required: true, default: "mn", enum: ["mn", "en"] },
     summary: { type: String },
     body: { type: String, required: true },
