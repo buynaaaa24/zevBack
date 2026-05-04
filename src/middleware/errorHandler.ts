@@ -24,6 +24,22 @@ export function errorHandler(
   }
 
   const message = err instanceof Error ? err.message : "Internal server error";
+  const isValidationError =
+    message.includes("allowed") || 
+    message.includes("required") || 
+    message.includes("invalid") ||
+    message.includes("Bad id");
+
+  if (isValidationError) {
+    res.status(400).json({
+      error: {
+        code: "VALIDATION_ERROR",
+        message,
+      },
+    });
+    return;
+  }
+
   console.error(err);
   res.status(500).json({
     error: {

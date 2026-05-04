@@ -32,7 +32,7 @@ const storage = multer.diskStorage({
 
 /** Default 15 MiB; override with `UPLOAD_MAX_MB` in `.env`. */
 const uploadMaxBytes =
-  Math.max(1, Number(process.env.UPLOAD_MAX_MB || "100") || 100) * 1024 * 1024;
+  Math.max(1, Number(process.env.UPLOAD_MAX_MB || "50") || 50) * 1024 * 1024;
 
 export const UPLOAD_MAX_BYTES = uploadMaxBytes;
 
