@@ -16,7 +16,7 @@ export async function createOrGetConversation(
   guestId: string,
   displayName?: string,
 ) {
-  let conv = await Conversation.findOne({ guestId });
+  let conv = await Conversation.findOne({ guestId, status: "open" });
   if (!conv) {
     conv = await Conversation.create({ guestId, displayName });
     const welcomeFromSite = (await getWelcomeMessageFromSite())?.trim();
@@ -40,7 +40,7 @@ export async function postUserMessage(
   text: string,
 ) {
   const conv = await Conversation.findById(conversationId);
-  if (!conv || conv.guestId !== guestId) {
+  if (!conv || conv.guestId !== guestId || conv.status === "closed") {
     throw new Error("FORBIDDEN");
   }
 

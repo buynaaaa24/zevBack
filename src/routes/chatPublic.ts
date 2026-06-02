@@ -41,7 +41,7 @@ chatPublicRouter.get("/conversations/:id/messages", async (req, res, next) => {
       return;
     }
     const conv = await Conversation.findById(id).lean();
-    if (!conv || conv.guestId !== guestId) {
+    if (!conv || conv.guestId !== guestId || conv.status === "closed") {
       res.status(404).json({
         error: { code: "NOT_FOUND", message: "Conversation not found" },
       });

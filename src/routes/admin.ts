@@ -15,6 +15,7 @@ import { invalidateChatbotSiteCache } from "../services/chatbotFromSite.js";
 import { adminLoginHandler, requireAdminAuth } from "../middleware/adminAuth.js";
 import { requirePermission } from "../middleware/adminRbac.js";
 import { ADMIN_PERMISSIONS } from "../constants/adminPermissions.js";
+import { emitConversationUpdate } from "../socket.js";
 
 function paramString(v: string | string[] | undefined): string {
   if (Array.isArray(v)) return v[0] ?? "";
@@ -319,6 +320,10 @@ adminRouter.patch("/conversations/:id", requirePermission("chat"), async (req, r
       res.status(404).json({ error: { code: "NOT_FOUND", message: "Chat" } });
       return;
     }
+    emitConversationUpdate(conv._id.toString(), {
+      status: conv.status,
+      humanMode: conv.humanMode,
+    });
     res.json({ data: serializeDocument(conv) });
   } catch (e) {
     next(e);
