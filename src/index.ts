@@ -19,6 +19,10 @@ const app = express();
 const port = Number(process.env.PORT) || 4000;
 /** Allowed browser origins (REST + Socket.io). Override with CORS_ORIGIN in .env */
 const PRODUCTION_ORIGINS = [
+  "https://zevtabs.mn",
+  "https://www.zevtabs.mn",
+  "http://zevtabs.mn",
+  "http://www.zevtabs.mn",
   "https://bukhbatllc.mn",
   "https://www.bukhbatllc.mn",
   "http://bukhbatllc.mn",
