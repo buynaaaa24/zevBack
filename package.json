@@ -4,10 +4,10 @@
   "private": true,
   "type": "module",
   "config": {
-    "port": "3003"
+    "port": "4000"
   },
   "scripts": {
-    "dev": "cross-env PORT=3003 tsx watch src/index.ts",
+    "dev": "cross-env PORT=5000 tsx watch src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
     "lint": "eslint src",
