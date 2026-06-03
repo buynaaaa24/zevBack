@@ -18,6 +18,7 @@ async function translateText(text: string): Promise<string> {
     trimmed.startsWith("http://") || 
     trimmed.startsWith("https://") ||
     trimmed.startsWith("/") || 
+    trimmed.startsWith("#") || 
     trimmed.startsWith("bg-") || 
     trimmed.startsWith("text-") || 
     trimmed.includes("@") || 
