@@ -81,6 +81,12 @@ export function initSocket(server: HttpServer, corsOrigins: string[]): Server {
       },
     );
 
+    socket.on("join-admin", (payload?: any, ack?: (err: Error | null) => void) => {
+      socket.join("admin-notifications");
+      console.log(`[Socket.IO] Admin socket ${socket.id} joined admin-notifications room`);
+      ack?.(null);
+    });
+
     socket.on("disconnect", (reason) => {
       console.log(`[Socket.IO] Client disconnected: ${socket.id}. Reason: ${reason}`);
     });
@@ -99,4 +105,12 @@ export function emitNewMessage(
     conversationId,
     message,
   });
+
+  if (message.role === "user") {
+    console.log(`[Socket.IO] Broadcasting user message to admin-notifications room. Msg ID: ${message.id || message._id}`);
+    io?.to("admin-notifications").emit("admin:new-user-message", {
+      conversationId,
+      message,
+    });
+  }
 }
