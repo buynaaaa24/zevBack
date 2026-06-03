@@ -81,13 +81,3 @@ export function emitNewMessage(
     message,
   });
 }
-
-export function emitConversationUpdate(
-  conversationId: string,
-  data: Record<string, unknown>,
-) {
-  io?.to(roomForConversation(conversationId)).emit("conversation:update", {
-    conversationId,
-    ...data,
-  });
-}
