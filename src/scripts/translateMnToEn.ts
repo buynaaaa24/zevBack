@@ -1,4 +1,5 @@
 import "dotenv/config";
+import mongoose from "mongoose";
 import { connectMongo } from "../db.js";
 import { SitePage } from "../models/SitePage.js";
 import { JobPosting } from "../models/JobPosting.js";
@@ -83,7 +84,9 @@ async function translateValue(value: any): Promise<any> {
 }
 
 async function main() {
-  await connectMongo();
+  const uri = process.env.MONGODB_URI || "mongodb://admin:Br1stelback1@127.0.0.1:27017/zevtabs?authSource=admin";
+  mongoose.set("strictQuery", true);
+  await mongoose.connect(uri);
   console.log("Connected to MongoDB database.");
 
   // 1. Translate SitePages
